@@ -1,5 +1,4 @@
 import{mkdirSync,readdirSync,readFileSync,writeFileSync}from'node:fs';
-import{join}from'node:path';
 const S='(9i,.237zzzzzzzz1111111-111-111z111zzzzzzzzzzzzzHLLH(zzzzzzzzzzz-0zzzzzzzzzzzzzz,,),';
 const F={16:(a,b)=>(a+b)|0,17:(a,b)=>(a-b)|0,18:Math.imul,19:(a,b)=>b?a===-2147483648&&b===-1?a:(a/b)|0:NaN,20:(a,b)=>b?b===-1?0:(a%b)|0:NaN,21:(a,b)=>b?Math.floor((a>>>0)/(b>>>0))|0:NaN,22:(a,b)=>b?(a>>>0)%(b>>>0)|0:NaN,24:(a,b)=>a&b,25:(a,b)=>a|b,26:(a,b)=>a^b,28:(a,b)=>a<<(b&31),29:(a,b)=>a>>(b&31),30:(a,b)=>(a>>>(b&31))|0,32:(a,b)=>a===b?1:0,33:(a,b)=>a<b?1:0,34:(a,b)=>(a>>>0)<(b>>>0)?1:0};
 function run(p,q){
@@ -81,8 +80,8 @@ case 83:return e(D[--s]&255);
 }
 const I=process.env.MAKEFUN_INPUT_DIR||'/input',O=process.env.MAKEFUN_OUTPUT_DIR||'/output';
 for(const d of readdirSync(I).sort()){
-const r=run(readFileSync(join(I,d,'program.bin')),readFileSync(join(I,d,'input.bin')));
-mkdirSync(join(O,d),{recursive:true});
-writeFileSync(join(O,d,'stdout.bin'),r.out);
-writeFileSync(join(O,d,'exit.txt'),r.code+'\n');
+const r=run(readFileSync(I+'/'+d+'/program.bin'),readFileSync(I+'/'+d+'/input.bin')),p=O+'/'+d;
+mkdirSync(p,{recursive:true});
+writeFileSync(p+'/stdout.bin',r.out);
+writeFileSync(p+'/exit.txt',r.code+'\n');
 }
